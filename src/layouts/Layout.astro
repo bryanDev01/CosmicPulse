@@ -1,0 +1,27 @@
+---
+import { Meteors } from "@/components/magicui/meteors";
+import "../styles/global.css";
+import NavBar from "@/components/NavBar.astro";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+  </head>
+  <body class="bg-slate-950">
+    <NavBar />
+    <!-- Contenedor principal para el fondo de meteoritos -->
+    <div class="fixed inset-0 z-0 overflow-hidden min-w-dvw">
+      <Meteors client:load number={50} />
+    </div>
+    
+    <!-- Contenedor del contenido principal -->
+    <div class="relative z-10 min-h-screen text-white">
+      <slot />
+    </div>
+  </body>
+</html>
