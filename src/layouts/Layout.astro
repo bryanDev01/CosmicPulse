@@ -2,6 +2,7 @@
 import { Meteors } from "@/components/magicui/meteors";
 import "../styles/global.css";
 import NavBar from "@/components/NavBar.astro";
+import "../styles/Layout.css"
 ---
 
 <html lang="en">
@@ -12,7 +13,7 @@ import NavBar from "@/components/NavBar.astro";
     <meta name="generator" content={Astro.generator} />
     <title>Astro</title>
   </head>
-  <body class="bg-slate-950">
+  <body class="bg-mesh bg-fixed">
     <NavBar />
     <!-- Contenedor principal para el fondo de meteoritos -->
     <div class="fixed inset-0 z-0 overflow-hidden min-w-dvw">
