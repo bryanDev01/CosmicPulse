@@ -1,0 +1,17 @@
+---
+import type { GeoStormData } from "@/types/types"
+
+const response = await fetch(`https://api.nasa.gov/DONKI/GST?startDate=2016-01-01&endDate=2016-01-30&api_key=${import.meta.env.PUBLIC_NASA_API_KEY}`)
+const data:GeoStormData[] = await response.json()
+---
+
+<ul class="text-white">
+    {data.map(d => (
+        <li>{d.allKpIndex.map(index => (
+            <p>kpindex: {index.kpIndex}</p>
+            <p>observed time: {index.observedTime}</p>
+            <p>source: {index.source}</p>
+        ))}</li>
+        <p>ID: {d.gstID}</p>    
+    ))}
+</ul>

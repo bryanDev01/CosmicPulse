@@ -7,3 +7,23 @@ export interface NSAData {
     title:           string;
     url:             string;
 }
+
+export interface GeoStormData {
+    gstID:          string;
+    startTime:      string;
+    allKpIndex:     AllKpIndex[];
+    link:           string;
+    linkedEvents:   LinkedEvent[];
+    submissionTime: string;
+    versionId:      number;
+}
+
+export interface AllKpIndex {
+    observedTime: string;
+    kpIndex:      number;
+    source:       string;
+}
+
+export interface LinkedEvent {
+    activityID: string;
+}

@@ -1,0 +1,69 @@
+---
+import { getSunData } from "@/data/data";
+import { Circle, Wind } from "lucide-react";
+const response = await fetch(
+  "https://services.swpc.noaa.gov/products/solar-wind/plasma-7-day.json"
+);
+const data: string[][] = await response.json();
+const newData = getSunData(data);
+const valuesData = newData?.slice(1, newData.length);
+console.log(data);
+---
+
+<div
+  class="bg-slate-950/70 rounded-lg shadow-sm shadow-yellow-400/40 py-3 outline-2 outline-yellow-300 hover:shadow-xl"
+>
+  <div
+    class="px-3 pb-4 text-xl tracking-tight text-white flex items-center gap-1"
+  >
+    <Wind className=" text-blue-400" />
+    <h2 class="text-xl font-bold mb-2">Solar Wind Parameters</h2>
+  </div>
+  <div class="w-full h-0.5 bg-yellow-300"></div>
+  <ul class="flex gap-6 items-center px-3 py-4">
+    {
+      valuesData?.map((vd) => (
+        <div class=" flex flex-col items-start justify-center gap-2 bg-slate-900/60 py-2 px-4 rounded-lg">
+          <p class=" text-sm font-semibold">
+            {vd.speed ? "Speed" : vd.density ? "Density" : "Temperature"}
+          </p>
+          <li class=" flex gap-2">
+            {vd.speed ? (
+              <p class=" flex gap-2 items-end">
+                <span class=" flex text-2xl font-bold">{vd.speed}</span>
+                <span class=" text-slate-200 text-sm">km/s</span>
+              </p>
+            ) : vd.density ? (
+              <p class="flex gap-2 items-end">
+                <span class=" flex text-2xl font-bold">{vd.density}</span>
+                <span class=" text-slate-200 text-sm">p/cm^3</span>
+              </p>
+            ) : (
+              <p class="flex text-2xl font-bold items-end">
+                <span class=" flex text-2xl font-bold">{vd.temperature}K</span>
+              </p>
+            )}
+          </li>
+        </div>
+      ))
+    }
+  </ul>
+  <div
+    class="flex gap-1 px-4 py-4 items-center bg-cyan-700/50 outline-1 outline-blue-900 w-min-content text-wrap m-auto mx-2 rounded-lg text-sm"
+  >
+    <Circle className=" fill-emerald-400 size-4" />
+    <p>
+      {
+        Number(newData?.map((data) => data.speed)) > 500
+          ? "Solar wind speed weak, wich may trigger auroral activity in the next 24-48 hours"
+          : "Solar wind speed is elevated, wich may trigger weak or local auroral activities in the next 24-48 hours usually near to the edges"
+      }
+    </p>
+  </div>
+  <div class="flex justify-between w-full py-4">
+    <p class="text-sm gap-1 text-slate-300 px-4 py-2">
+      Last updated: {newData?.map((data) => data.time_tag)}
+    </p>
+    <p class="text-sm gap-1 text-slate-300 px-4 py-2">Source: NOAA SWPC</p>
+  </div>
+</div>

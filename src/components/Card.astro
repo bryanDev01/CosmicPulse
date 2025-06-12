@@ -1,6 +1,7 @@
 ---
 import type { NSAData } from "../types/types";
 import { BorderBeam } from "../components/magicui/border-beam";
+import { Earth } from "lucide-react";
 
 interface Props {
   data: NSAData;
@@ -10,17 +11,17 @@ const { data } = Astro.props;
 ---
 
 <div
-  class="bg-slate-900/50 text-white rounded-lg shadow-lg shadow-slate-800 w-4/5 h-fit flex justify-start items-start gap-1.5"
+  class="bg-slate-900/50 text-white rounded-lg shadow-sm shadow-slate-950 w-4/5 h-fit flex items-stretch gap-1.5 hover:shadow-xl outline-2 outline-slate-700 overflow-hidden "
 >
-  <div class="w-1/2 h-full overflow-hidden">
+  <div class="w-1/2 overflow-hidden">
     <img
       src={data.url}
       alt={data.explanation}
-      class="w-full h-full rounded-l-lg hover:scale-110 transition-all object-contain"
+      class="w-full h-full rounded-l-lg hover:scale-110 transition-all object-cover"
     />
   </div>
-  <div class="w-1/2 py-3 flex flex-col gap-1.5 p-4 text-pretty">
-    <h2 class="text-xl font-bold mb-2">{data.title}</h2>
+  <div class="w-1/2 py-3 flex flex-col gap-1 p-4 text-pretty">
+    <span class=" flex gap-1 items-center "><Earth className=" text-green-500 size-7"/><h2 class="text-xl font-bold mb-2">{data.title}</h2></span>
     <p class="text-md text-pretty">
       {data.explanation}
     </p>

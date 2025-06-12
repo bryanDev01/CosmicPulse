@@ -2,6 +2,8 @@
 import Layout from "../layouts/Layout.astro";
 import Card from "@/components/Card.astro";
 import type { NSAData } from "../types/types";
+import SunCard from "@/components/SunCard.astro";
+import GeomacneticCard from "@/components/GeomacneticCard.astro";
 
 const response = await fetch(
   `https://api.nasa.gov/planetary/apod?api_key=${import.meta.env.PUBLIC_NASA_API_KEY}`
@@ -10,14 +12,18 @@ const data: NSAData = await response.json();
 ---
 
 <Layout>
-  <section class="w-full">
+  <section class="w-full pb-4">
     <h1
       class="text-3xl bg-gradient-to-br from-blue-800 to-violet-500 bg-clip-text text-transparent font-semibold text-center pt-6 pb-3"
     >
       Astronomy Picture of the Day
     </h1>
     <div class="flex justify-center items-center gap-4">
-      <Card data={data}/>
+      <Card data={data} />
     </div>
+  </section>
+  <section class="w-full py-4 flex justify-center items-center gap-4">
+    <SunCard />
+    <GeomacneticCard />
   </section>
 </Layout>
